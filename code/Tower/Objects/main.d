@@ -38,3 +38,4 @@
 .\objects\main.o: .\hardware\adxl345.h
 .\objects\main.o: .\hardware\key.h
 .\objects\main.o: .\hardware\alarm_moduel.h
+.\objects\main.o: .\hardware\esp8266_uart.h

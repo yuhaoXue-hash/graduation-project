@@ -14,7 +14,7 @@ extern int warning_flag;
 static uint8_t display_type = 0;
 static uint8_t wind_high_flag = 0; 
 
-void ADC1_Init(void)
+static void ADC1_Init(void)
 {
 	RCC_APB2PeriphClockCmd(Wind_Sensor_CLK, ENABLE);
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC1, ENABLE);
@@ -42,6 +42,11 @@ void ADC1_Init(void)
 	while(ADC_GetResetCalibrationStatus(ADC1) == SET);
 	ADC_GetResetCalibrationStatus(ADC1);
 	while(ADC_GetCalibrationStatus(ADC1) == SET);
+}
+
+void wind_force_sensor_init(void)
+{
+	ADC1_Init();
 }
 
 uint16_t AD_GetValue(void)

@@ -14,7 +14,7 @@
 uint8_t Serial_RxData[64];		//定义串口接收的数据变量
 uint8_t Serial_RxFlag;		    //定义串口接收的标志位变量
 
-void USART1_init(void)
+static void USART1_init(void)
 {
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE);
 	RCC_APB2PeriphClockCmd(SHT30_TX_CLK, ENABLE);
@@ -53,7 +53,14 @@ void USART1_init(void)
 	USART_Cmd(USART1, ENABLE);	
 }
 
-void Serial_RxData_clear(void)
+void SHT30_init(void)
+{
+	USART1_init();
+	
+	USART1_Send_String("Hand\r\n");
+}
+
+static void Serial_RxData_clear(void)
 {
 	for(uint8_t i = 0; i < 64; i++)
 	{
@@ -61,7 +68,7 @@ void Serial_RxData_clear(void)
 	}
 }
 
-void USART1_Send_Char(uint16_t data)
+static void USART1_Send_Char(uint16_t data)
 {
 	USART_SendData(USART1, data);
 	while(USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET);
@@ -76,7 +83,7 @@ void USART1_Send_String(char *pstr)
 	}
 }
 
-uint16_t USART1_Recieve_Char(void)
+static uint16_t USART1_Recieve_Char(void)
 {
 	uint16_t RECIEVE_data;
 	

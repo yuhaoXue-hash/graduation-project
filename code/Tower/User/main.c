@@ -9,6 +9,7 @@
 #include "adxl345.h"
 #include "key.h"
 #include "alarm_moduel.h"
+#include "esp8266_uart.h"
 
 int main(void)
 {	
@@ -21,21 +22,34 @@ int main(void)
 	float z_angle = 0;
 	
 	OLED_Init();
-	USART1_init();
+	SHT30_init();
 	SW1801_Init();
 	BUZZER_Init();
-	ADC1_Init();
+	wind_force_sensor_init();
 	ADXL345_init(); 
 	key_Init();
+	esp8266_init();
 		
 	while(1)
 	{
+		if(key_scan() == 1)
+		{
+			USART2_Send_String("Key press\r\n");
+			OLED_ShowString(1,1,"Key press");
+			Delay_ms(1000);
+		}
+		else 
+		{
+			OLED_Clear();
+		}
+		
+#if 0
 		Get_temperature_humidity((char *)humidity, (char *)temperature);
 		Get_vibration_value();
 		Get_Wind_Force(&wind_force);
 		Get_Angle_Value(&x_angle,&y_angle,&z_angle);
 		
-		ret = alarm_process();	//监测报警程序 
+		ret = alarm_process();		//监测报警程序 
 		
 		//*****若未触发报警则正常执行显示功能****//
 		if(ret == 0)			
@@ -44,5 +58,9 @@ int main(void)
 			Display_temperature_humidity((char *)humidity, (char *)temperature);
 			Display_wind_force(wind_force);
 		}
+#endif
+		
+		
 	}
+
 }

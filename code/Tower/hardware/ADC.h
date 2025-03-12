@@ -15,7 +15,7 @@
 #define	 VIOLENT_STORM		28.5	//Violent storm
 #define	 TYPHOON			32.7	//Typhoon
 
-void ADC1_Init(void);
+void wind_force_sensor_init(void);
 uint16_t AD_GetValue(void);
 void Wind_Force_Level_Display(float level);
 void Get_Wind_Force(float *wind_force);

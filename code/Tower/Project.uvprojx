@@ -670,6 +670,16 @@
               <FileType>5</FileType>
               <FilePath>.\hardware\alarm_moduel.h</FilePath>
             </File>
+            <File>
+              <FileName>esp8266_uart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\hardware\esp8266_uart.c</FilePath>
+            </File>
+            <File>
+              <FileName>esp8266_uart.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\hardware\esp8266_uart.h</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
